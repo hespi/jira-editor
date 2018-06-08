@@ -1,18 +1,31 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 
-class MySuperCoolComponent extends Component {
-  handleClick = () => {
-    console.log("Click!");
-  };
+class JiraEditor extends Component {
+  
+  static propTypes = {
+    
+  }
+
+  static defaultProps = {
+    
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+
+    };
+  }
 
   render() {
-    const { color, children } = this.props;
     return (
-      <button onClick={this.handleClick} style={{ color }}>
-        {children}
-      </button>
+      <div className="jira-editor">
+        {this.props.children}
+      </div>
     );
   }
 }
 
-export default MySuperCoolComponent;
+export default JiraEditor;
