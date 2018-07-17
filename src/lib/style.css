@@ -1,0 +1,162 @@
+.jira-editor {
+    color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    line-height: 1.4286
+}
+
+.jira-editor .content textarea {
+    width: calc(100% - 6px);
+    height: 200px;
+    margin: -1px 0px 0px 0px;
+}
+
+/** VIEW SELECTOR **/
+
+.jira-editor .view-selector {
+    background-color: #dfdfdf;
+    border: #999 solid 1px;
+    border-radius: 0px 0px 4px 4px;
+    padding: 4px;
+    margin: -7px 0px 0px 0px;
+}
+
+/** TOOLBOX **/
+
+.jira-editor .toolbox {
+    background-color: #dfdfdf;
+    border: #999 solid 1px;
+    border-radius: 4px 4px 0px 0px;
+    padding: 4px;
+}
+
+.jira-editor .toolbox>* {
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.jira-editor .toolbox>*:first-child {
+    margin-left: 0px;
+}
+
+.jira-editor .toolbox .toolbox-group {
+    border-left: #999 solid 1px;
+}
+
+.jira-editor .toolbox .toolbox-group>* {
+    margin-left: 5px;
+}
+
+/** TEXT STYLE SELECTOR **/
+
+.jira-editor .Select-menu-outer {
+    width: auto;
+}
+
+.jira-editor .text-style-selector {
+    width: 120px;
+}
+
+.jira-editor .text-style-selector .text-style {
+    padding: 3px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.jira-editor .text-style-selector .text-style.text-style-paragraph {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.jira-editor .text-style-selector .text-style.text-style-heading1 {
+    font-size: 34px;
+    line-height: 48.57px;
+}
+
+.jira-editor .text-style-selector .text-style.text-style-heading2 {
+    font-size: 25px;
+    line-height: 35.71px;
+}
+
+.jira-editor .text-style-selector .text-style.text-style-heading3 {
+    font-size: 18px;
+    line-height: 25.71px;
+}
+
+.jira-editor .text-style-selector .text-style.text-style-heading4 {
+    font-size: 17px;
+    line-height: 24.29px;
+}
+
+.jira-editor .text-style-selector .text-style.text-style-heading5 {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.jira-editor .text-style-selector .text-style.text-style-heading6 {
+    font-size: 13px;
+    line-height: 18.57px;
+}
+
+.jira-editor .text-style-selector .text-style.text-style-preformatted {
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.jira-editor .text-style-selector .text-style.text-style-paragraph-quote {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.jira-editor .text-style-selector .text-style.text-style-block-quote {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+/** ICONS **/
+
+.jira-editor .link-button {
+    text-decoration: none;
+    padding: 4px 6px 4px 6px;
+    display: inline-block;
+    border: 1px transparent solid;
+    border-radius: 4px;
+}
+
+.jira-editor .link-button:hover {
+    border: 1px #707070 solid;
+    background-color: #cfcfcf; 
+}
+
+.jira-editor .icon {
+    width: 21px;
+    height: 21px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+}
+
+.jira-editor .icon.icon-bold {
+    background-image: url('images/bold.svg');
+}
+
+.jira-editor .icon.icon-italic {
+    background-image: url('images/italic.svg');
+}
+
+.jira-editor .icon.icon-underline {
+    background-image: url('images/underline.svg');
+}
+
+.jira-editor .icon.icon-listol {
+    background-image: url('images/list-ol.svg');
+}
+
+.jira-editor .icon.icon-listul {
+    background-image: url('images/list-ul.svg');
+}
