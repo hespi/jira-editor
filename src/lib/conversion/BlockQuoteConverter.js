@@ -5,7 +5,7 @@ export default class BlockQuoteConverter extends MarkupConverter {
     /** PROPERTIES */
 
     get tagName() {
-        return "q";
+        return "blockquote";
     }
 
     get validationExpression() {

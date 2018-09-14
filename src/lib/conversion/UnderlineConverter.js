@@ -5,7 +5,7 @@ export default class UnderlineConverter extends MarkupConverter {
     /** PROPERTIES */
 
     get tagName() {
-        return "u";
+        return "ins";
     }
 
     get validationExpression() {
@@ -27,7 +27,7 @@ export default class UnderlineConverter extends MarkupConverter {
     /** FUNCTIONS */
 
     _doGetJIRAMarkup = (HTMLElement) => {
-        return `+${HTMLElement.innerHTML}+`;
+        return this.trimAndSorroundWith(HTMLElement.innerHTML, "+");
     }
 
     _doGetHTMLElement = (JIRAMarkup) => {

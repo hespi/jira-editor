@@ -1,4 +1,5 @@
 docs
 src
+lib
 .babelrc
 webpack.config.js

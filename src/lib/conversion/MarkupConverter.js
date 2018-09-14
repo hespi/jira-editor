@@ -16,6 +16,22 @@ export default class MarkupConverter {
         throw new Error("Not implemented");
     }
 
+    getStartWhiteSpaces = (text) => {
+        let aux = /^\s+/.exec(text);
+        return !!aux ? aux[0] : "";
+    }
+
+    getEndWhiteSpaces = (text) => {
+        let aux = /\s+$/.exec(text);
+        return !!aux ? aux[0] : "";
+    }
+
+    trimAndSorroundWith = (text, sorroundString) => {
+        let startWhiteSpaces = this.getStartWhiteSpaces(text);
+        let endWhiteSpaces = this.getEndWhiteSpaces(text);
+        return startWhiteSpaces + sorroundString + text.trim() + sorroundString + endWhiteSpaces;
+    }
+
     validateHTMLElement = (HTMLElement, errorMessage = "") => {
         if (!!HTMLElement && this.tagName.toLowerCase() !== HTMLElement.tagName.toLowerCase()) {
             throw `Invalid HTML element '${HTMLElement.tagName.toLowerCase()}', expected '${this.tagName.toLowerCase()}'`;

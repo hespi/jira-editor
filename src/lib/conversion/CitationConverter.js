@@ -27,7 +27,7 @@ export default class CitationConverter extends MarkupConverter {
     /** FUNCTIONS */
 
     _doGetJIRAMarkup = (HTMLElement) => {
-        return `??${HTMLElement.innerHTML}??`;
+        return this.trimAndSorroundWith(HTMLElement.innerHTML, "??");
     }
 
     _doGetHTMLElement = (JIRAMarkup) => {

@@ -40,7 +40,13 @@ export default class ColorConverter extends MarkupConverter {
 
     _getElementColor = (HTMLElement) => {
         return (!!HTMLElement.style && !!HTMLElement.style.color) ? "#" + HTMLElement.style.color.match(/\d+/g).map((rgb) => {
-            return parseInt(rgb, 16);
+            return this._hexColour(parseInt(rgb));
         }).join('') : "";
     }
+
+    _hexColour(value) {
+        let hex = ("0" + ((value < 256) ? Math.abs(value).toString(16) : "0"));
+        return hex.substr(hex.length > 2 ? 1 : 0, 2);
+      }
+    
 }

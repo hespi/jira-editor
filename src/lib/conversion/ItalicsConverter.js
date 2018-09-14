@@ -5,7 +5,7 @@ export default class ItalicsConverter extends MarkupConverter {
     /** PROPERTIES */
 
     get tagName() {
-        return "i";
+        return "em";
     }
 
     get validationExpression() {
@@ -27,7 +27,7 @@ export default class ItalicsConverter extends MarkupConverter {
     /** FUNCTIONS */
 
     _doGetJIRAMarkup = (HTMLElement) => {
-        return `_${HTMLElement.innerHTML}_`;
+        return this.trimAndSorroundWith(HTMLElement.innerHTML, "_");
     }
 
     _doGetHTMLElement = (JIRAMarkup) => {

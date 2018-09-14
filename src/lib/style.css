@@ -5,12 +5,6 @@
     line-height: 1.4286
 }
 
-.jira-editor .content textarea {
-    width: calc(100% - 6px);
-    height: 200px;
-    margin: -1px 0px 0px 0px;
-}
-
 /** VIEW SELECTOR **/
 
 .jira-editor .view-selector {
@@ -21,30 +15,29 @@
     margin: -7px 0px 0px 0px;
 }
 
-/** TOOLBOX **/
+/** TOOLBAR **/
 
-.jira-editor .toolbox {
-    background-color: #dfdfdf;
-    border: #999 solid 1px;
+.jira-editor .toolbar {
+    background-color: #f5f5f5;
+    border: #ccc solid 1px;
     border-radius: 4px 4px 0px 0px;
-    padding: 4px;
+    padding: 6px 5px 0;
 }
 
-.jira-editor .toolbox>* {
+.jira-editor .toolbar>* {
     display: inline-block;
-    margin-left: 5px;
     vertical-align: middle;
 }
 
-.jira-editor .toolbox>*:first-child {
+.jira-editor .toolbar>*:first-child {
     margin-left: 0px;
 }
 
-.jira-editor .toolbox .toolbox-group {
+.jira-editor .toolbar .toolbar-group {
     border-left: #999 solid 1px;
 }
 
-.jira-editor .toolbox .toolbox-group>* {
+.jira-editor .toolbar .toolbar-group>* {
     margin-left: 5px;
 }
 
@@ -55,10 +48,16 @@
 }
 
 .jira-editor .text-style-selector {
-    width: 120px;
+    width: 110px;
+    background-color: #f5f5f5;
+    border: transparent solid 1px;
 }
 
-.jira-editor .text-style-selector .text-style {
+.jira-editor .text-style-selector:hover {
+    border: #ccc solid 1px;
+}
+
+.jira-editor .text-style-selector ul li {
     padding: 3px 10px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -66,78 +65,81 @@
     cursor: pointer;
 }
 
-.jira-editor .text-style-selector .text-style.text-style-paragraph {
+.jira-editor .text-style-selector ul li:nth-child(1) {
     font-size: 14px;
     line-height: 20px;
 }
 
-.jira-editor .text-style-selector .text-style.text-style-heading1 {
-    font-size: 34px;
-    line-height: 48.57px;
+.jira-editor .text-style-selector ul li:nth-child(2) {
+    font-size: 34px !important;
+    line-height: 48.57px !important;
 }
 
-.jira-editor .text-style-selector .text-style.text-style-heading2 {
+.jira-editor .text-style-selector ul li:nth-child(3) {
     font-size: 25px;
     line-height: 35.71px;
 }
 
-.jira-editor .text-style-selector .text-style.text-style-heading3 {
+.jira-editor .text-style-selector ul li:nth-child(4) {
     font-size: 18px;
     line-height: 25.71px;
 }
 
-.jira-editor .text-style-selector .text-style.text-style-heading4 {
+.jira-editor .text-style-selector ul li:nth-child(5) {
     font-size: 17px;
     line-height: 24.29px;
 }
 
-.jira-editor .text-style-selector .text-style.text-style-heading5 {
+.jira-editor .text-style-selector ul li:nth-child(6) {
     font-size: 14px;
     line-height: 20px;
 }
 
-.jira-editor .text-style-selector .text-style.text-style-heading6 {
+.jira-editor .text-style-selector ul li:nth-child(7) {
     font-size: 13px;
     line-height: 18.57px;
 }
 
-.jira-editor .text-style-selector .text-style.text-style-preformatted {
+.jira-editor .text-style-selector ul li:nth-child(8) {
     font-family: monospace;
     font-size: 14px;
     line-height: 20px;
 }
 
-.jira-editor .text-style-selector .text-style.text-style-paragraph-quote {
+.jira-editor .text-style-selector ul li:nth-child(9) {
     font-size: 14px;
     line-height: 20px;
 }
 
-.jira-editor .text-style-selector .text-style.text-style-block-quote {
+.jira-editor .text-style-selector ul li:nth-child(2) {
     font-size: 14px;
     line-height: 20px;
 }
 
 /** ICONS **/
 
-.jira-editor .link-button {
+.jira-editor .rdw-option-wrapper {
     text-decoration: none;
     padding: 4px 6px 4px 6px;
+    margin: 0px;
     display: inline-block;
     border: 1px transparent solid;
     border-radius: 4px;
+    background-color: transparent;
 }
 
-.jira-editor .link-button:hover {
-    border: 1px #707070 solid;
-    background-color: #cfcfcf; 
+.jira-editor .rdw-option-wrapper:hover {
+    border: 1px #ccc solid;
+    background-color: #f0f0f0; 
 }
 
 .jira-editor .icon {
-    width: 21px;
-    height: 21px;
+    width: 20px;
+    height: 20px;
     display: inline-block;
     background-repeat: no-repeat;
     background-position: center;
+    background-size: 16px 16px;
     vertical-align: middle;
 }
 
@@ -153,10 +155,39 @@
     background-image: url('images/underline.svg');
 }
 
+.jira-editor .icon.icon-strikethrough {
+    background-image: url('images/strikethrough.svg');
+}
+
+.jira-editor .icon.icon-superscript {
+    background-image: url('images/superscript.svg');
+}
+
+.jira-editor .icon.icon-subscript {
+    background-image: url('images/subscript.svg');
+}
+
 .jira-editor .icon.icon-listol {
     background-image: url('images/list-ol.svg');
 }
 
 .jira-editor .icon.icon-listul {
     background-image: url('images/list-ul.svg');
+}
+
+.jira-editor .icon.icon-color-picker {
+    background-image: url('images/text-color.svg');
+}
+
+.jira-editor .icon.icon-emoji {
+    background-image: url('images/emoji.svg');
+}
+
+/** EDITOR **/
+
+.jira-editor .content {
+    background-color: white;
+    border: 1px #ccc solid;
+    margin-top: -6px;
+    padding: 0px 10px;
 }

@@ -25,7 +25,7 @@ describe('CitationConverter', () => {
     });
   
     test('when converting the proper HTML element with HTML markup on it, then returns JIRA markup respecting internal markup', () => {
-      expect(converter.getJIRAMarkup(TestUtils.createHtmlElement("cite", " Test <b>content with markup</b> "))).toEqual("?? Test <b>content with markup</b> ??");
+      expect(converter.getJIRAMarkup(TestUtils.createHtmlElement("cite", " Test <b>content with markup</b> "))).toEqual(" ??Test <b>content with markup</b>?? ");
     });
   });
 

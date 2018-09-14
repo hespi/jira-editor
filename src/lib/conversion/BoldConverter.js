@@ -5,7 +5,7 @@ export default class BoldConverter extends MarkupConverter {
     /** PROPERTIES */
 
     get tagName() {
-        return "b";
+        return "strong";
     }
 
     get validationExpression() {
@@ -27,7 +27,7 @@ export default class BoldConverter extends MarkupConverter {
     /** FUNCTIONS */
 
     _doGetJIRAMarkup = (HTMLElement) => {
-        return `*${HTMLElement.innerHTML}*`;
+        return this.trimAndSorroundWith(HTMLElement.innerHTML, "*");
     }
 
     _doGetHTMLElement = (JIRAMarkup) => {

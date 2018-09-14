@@ -1,38 +1,40 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import Select from 'react-select';
-import { EditorModes } from './enum/EditorModes';
-import { TEXT_STYLES } from './data/TextStyles';
-import 'react-select/dist/react-select.css';
+import { Editor } from 'react-draft-wysiwyg';
+import { EditorState, ContentState, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
+import HtmlJiraConverter from './conversion/HtmlJiraConverter';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './style.css';   
 
 class JiraEditor extends Component {
   
   static propTypes = {
-    width: PropTypes.string,
-    height: PropTypes.string,
-    mode: PropTypes.string,
-    boldActive: PropTypes.bool,
-    italicActive: PropTypes.bool,
+    html: PropTypes.string
   }
 
   static defaultProps = {
-    width: "100%",
-    height: "100%",
-    mode: EditorModes.Visual
+    html: ""
   }
 
   /** GETTERS/SETTERS */
 
+  get html() {
+    return this._convertEditorStateToHtml(this.state.editorState);
+  }
+
   get markup() {
-    return this._generateJIRAMarkup(this.state.htmlText);
+    return this._convertHtmlToJiraMarkup(this.html);
   }
 
   constructor(props) {
     super(props);
 
+    this._markupConverter = this._initializeConverter();
+
     this.state = {
-      htmlText: ""
+      editorState: (!!props.html) ? EditorState.createWithContent(this._convertHtmlToEditorState(props.html)) : EditorState.createEmpty(),
     };
   }
 
@@ -41,52 +43,102 @@ class JiraEditor extends Component {
 
 /** FUNCTIONS */
 
-  _generateJIRAMarkup = (htmlText) => {
+_initializeConverter = () => {
+  return new HtmlJiraConverter();
+}
 
+_convertHtmlToEditorState = (html) => {
+  const blocksFromHTML = htmlToDraft(html);
+  return ContentState.createFromBlockArray(
+    blocksFromHTML.contentBlocks,
+    blocksFromHTML.entityMap
+  );
+}
+
+_convertEditorStateToHtml = (editorState) => {
+  return draftToHtml(convertToRaw(editorState.getCurrentContent()));
+}
+
+  _convertHtmlToJiraMarkup = (htmlText) => {
+    var element = document.createElement("div");
+    element.innerHTML = htmlText;
+    return this._markupConverter.getJIRAMarkup(element);
   }
 
 /** EVENTS */
-
-  onTextStyle_Change = (event) => {
-
-  }
-
-  onPlainText_Change = (event) => {
-
-  }
+  onEditorState_Change = (editorState) => {
+    this.setState({
+      editorState,
+    });
+  };
 
   render() {
+    const { editorState } = this.state;
     return (
-      <div className="jira-editor" style={{width: this.props.width, height: this.props.height}}>
-        <div className="toolbox">
-          <Select 
-            name="jira-editor-text-style"
-            className="text-style-selector"
-            onChange={this.onTextStyle_Change}
-            options={TEXT_STYLES}
-          />
-          <div className="toolbox-group">
-            <a href="javascript:;" className="link-button toolbox-operation toolbox-operation-bold" title="Bold"><i className="icon icon-bold"></i></a>
-            <a href="javascript:;" className="link-button toolbox-operation toolbox-operation-italic" title="Italic"><i className="icon icon-italic"></i></a>
-            <a href="javascript:;" className="link-button toolbox-operation toolbox-operation-underline" title="Underline"><i className="icon icon-underline"></i></a>
-          </div>
-          <div className="toolbox-group">
-            <a href="javascript:;" className="link-button toolbox-operation toolbox-operation-listul" title="Bullet list"><i className="icon icon-listul"></i></a>
-            <a href="javascript:;" className="link-button toolbox-operation toolbox-operation-listol" title="Numbered list"><i className="icon icon-listol"></i></a>
-          </div>
-        </div>
-        <div className="content">
-          <div className="content-visual">
-          </div>
-          <div className="content-plain">
-            <textarea value={this.props.children} onChange={this.onPlainText_Change}></textarea>
-          </div>
-        </div>
-        <div className="view-selector">
-          <div className="tab">View</div>
-          <div className="tab">Text</div>
-        </div>
-      </div>
+      <Editor 
+        editorState={editorState}
+        wrapperClassName="jira-editor"
+        editorClassName="content"
+        toolbarClassName="toolbar"
+        onEditorStateChange={this.onEditorState_Change}
+        toolbar={{
+          options: ['blockType', 'inline', 'list', 'colorPicker', 'emoji'],
+          blockType: {
+            inDropdown: true,
+            options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote', 'Code'],
+            className: 'text-style-selector',
+            component: undefined,
+            dropdownClassName: undefined,
+          },
+          inline: {
+            options: ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript'],
+            bold: { icon: '', className: 'icon icon-bold' },
+            italic: { icon: '', className: 'icon icon-italic' },
+            underline: { icon: '', className: 'icon icon-underline' },
+            strikethrough: { icon: '', className: 'icon icon-strikethrough' },
+            superscript: { icon: '', className: 'icon icon-superscript' },
+            subscript: { icon: '', className: 'icon icon-subscript' },
+          },
+          list: {
+            inDropdown: false,
+            className: undefined,
+            component: undefined,
+            dropdownClassName: undefined,
+            options: ['unordered', 'ordered'],
+            unordered: { icon: '', className: 'icon icon-listul' },
+            ordered: { icon: '', className: 'icon icon-listol' },
+          },
+          colorPicker: {
+            icon: '',
+            className: 'icon icon-color-picker',
+            component: undefined,
+            popupClassName: undefined,
+            colors: ['rgb(97,189,109)', 'rgb(26,188,156)', 'rgb(84,172,210)', 'rgb(44,130,201)',
+              'rgb(147,101,184)', 'rgb(71,85,119)', 'rgb(204,204,204)', 'rgb(65,168,95)', 'rgb(0,168,133)',
+              'rgb(61,142,185)', 'rgb(41,105,176)', 'rgb(85,57,130)', 'rgb(40,50,78)', 'rgb(0,0,0)',
+              'rgb(247,218,100)', 'rgb(251,160,38)', 'rgb(235,107,86)', 'rgb(226,80,65)', 'rgb(163,143,132)',
+              'rgb(239,239,239)', 'rgb(255,255,255)', 'rgb(250,197,28)', 'rgb(243,121,52)', 'rgb(209,72,65)',
+              'rgb(184,49,47)', 'rgb(124,112,107)', 'rgb(209,213,216)'],
+          },
+          emoji: {
+            icon: '',
+            className: 'icon icon-emoji',
+            component: undefined,
+            popupClassName: undefined,
+            emojis: [
+              '😀', '😁', '😂', '😃', '😉', '😋', '😎', '😍', '😗', '🤗', '🤔', '😣', '😫', '😴', '😌', '🤓', '😛', '😜', '😠', '😇', '😷', '😈', 
+              '👻', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '🙈', '🙉', '🙊', '🐵',
+              '💪', '👈', '👉', '👉', '👆', '🖕', '👇', '🖖', '🤘', '🖐', '👌', '👍', '👎', '✊', '👊',
+              '🚑', '⏰', '🌙', '🌝', '🌞', '⭐', '🌟', '🌠', '🌨', '🌩', '⛄', '🔥', '🎄', '🎈',
+              '🎉', '🎊', '🎁', '📅',
+              '✅', '❎','✔','✖', '⛔', '⚠', '🚫','❗','❓','⁉','‼',
+              '🔝','🔜','🔙','🔄','↪','↩',
+              '▶','⏩','⏭','⏯','◀','⏪','⏮',
+              '©','®','™'
+            ],
+          }
+        }}
+      />
     );
   }
 }

@@ -223,8 +223,7 @@ export default class JiraTokenizer {
         let list = Array.isArray(tokenNameList) ? tokenNameList : [tokenNameList];
         list.forEach(tokenName => {
             let buffer = this._getBufferWithName((tokenName === true ? this.currentBuffer.name : tokenName));
-            console.log("CANCELLING Token " + buffer.name);
-
+            
             this._removeBuffer(buffer);
             this._removeState(buffer.state);
 
@@ -254,9 +253,6 @@ export default class JiraTokenizer {
         if (buffer.ini < end) {
             buffer.text = this.source.substring(buffer.ini, end);
             if (buffer.text !== '\n') {
-                //debugger;
-
-                console.log("MATCHED (" + buffer.name + "): " + buffer.text)
                 this._matchBuffer.push(this._buildToken(buffer));
                 this._removeBuffer(buffer);
             }
