@@ -82,9 +82,8 @@ function render() {
     <button onClick={onGetHtml_Click}>Get HTML</button>
     )
 }
-
 ```
-
+```
 var jiraEditor = null;
 
 function onJiraEditor_Loaded(editor) {
