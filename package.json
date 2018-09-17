@@ -12,7 +12,7 @@
     "docs:prod": "webpack --mode production",
     "test": "\"npm run build\" && jest"
   },
-  "keywords": [],
+  "keywords": ["jira","editor","wysiwyg","reactjs","markup"],
   "license": "MIT",
   "peerDependencies": {
     "react": "^15.3.0 || ^16.2.0",
