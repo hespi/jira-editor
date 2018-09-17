@@ -2,6 +2,8 @@
 
 A WYSIWYG editor based on DraftJS Editor that generates JIRA markup.
 
+To test it, open the [demo page.](https://hespi.github.io/jira-editor/)
+
 ## Installation
 
 ```
@@ -9,6 +11,7 @@ npm install --save jira-editor
 ```
 
 ## Usage
+
 
 ```
 import JiraEditor from "jira-editor";
