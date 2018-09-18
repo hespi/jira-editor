@@ -7,14 +7,14 @@ To test it, open the [demo page.](https://hespi.github.io/jira-editor/)
 ## Installation
 
 ```
-npm install --save jira-editor
+npm install --save react-jira-editor
 ```
 
 ## Usage
 
 
 ```
-import JiraEditor from "jira-editor";
+import JiraEditor from "react-jira-editor";
 
 var jiraEditor = null;
 
