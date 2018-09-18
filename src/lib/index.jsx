@@ -8,7 +8,7 @@ import HtmlJiraConverter from './conversion/HtmlJiraConverter';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import './style.css';   
 
-export class JiraEditor extends Component {
+class JiraEditor extends Component {
   
   static propTypes = {
     html: PropTypes.string
