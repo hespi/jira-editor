@@ -34,6 +34,21 @@ function render() {
 ### Editor initialization
 Use the following attributes for component initialization
 
+* _text_: string_ - The initial contents of the editor in plain text format.
+
+Example:
+
+```
+var initialContent = 'Editor contents';
+
+function render() {
+    return (
+    <JiraEditor text={initialContent} />
+    )
+}
+
+```
+
 * _html: string_ - The initial contents of the editor in HTML format.
 
 Example:
@@ -58,6 +73,28 @@ function render() {
     )
 }
 
+```
+
+### Events
+
+Use _onChange_ event to keep the state of the editor contents. You will get the editor contents in text, html and markup formats inside the event object.
+
+* _onChange:_ - To keep the state of the editor contents. You will get the editor contents in text, html and markup formats inside the event object
+
+Example:
+
+```
+function onJIRAEditor_Change(editorContents) {
+  console.log(editorContents.text);
+  console.log(editorContents.html);
+  console.log(editorContents.markup);
+}
+
+function render() {
+    return (
+    <JiraEditor onChange={onJIRAEditor_Change} />
+    )
+}
 ```
 
 ### Markup generation

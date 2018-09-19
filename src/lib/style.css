@@ -5,14 +5,17 @@
     line-height: 1.4286
 }
 
-/** VIEW SELECTOR **/
+.jira-editor-wrapper {
+    position: relative;
+}
 
-.jira-editor .view-selector {
-    background-color: #dfdfdf;
-    border: #999 solid 1px;
-    border-radius: 0px 0px 4px 4px;
-    padding: 4px;
-    margin: -7px 0px 0px 0px;
+.jira-editor-wrapper input {
+    position: absolute !important;
+    width: 0px !important;
+    height: 0px !important;
+    bottom: 1px !important;
+    left: 1px !important;
+    z-index: -1;
 }
 
 /** TOOLBAR **/

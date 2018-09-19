@@ -34,14 +34,33 @@ function onGetMarkup_Click(sender) {
 
 }
 
+function onJIRAEditor_Change(event) {
+  console.log(event);
+}
+
 function Demo() {
   return (
     <div>
       <h1>JIRA editor demo</h1>
-      <JiraEditor html={initialContent} ref={onJiraEditor_Loaded} />
+      <form action="#">
+        <JiraEditor html={initialContent} ref={onJiraEditor_Loaded} required={true} onChange={onJIRAEditor_Change} />
+        <br/>
+        <button type="submit">Validate and submit</button>
+      </form>
+      
       <br/>
       <article>
         <h2>Editor initialization</h2>
+        <section>
+          Use <em>text</em> attribute to set the editor contents in plain text.<br/><br/>
+        </section>
+        
+        <pre>{`
+        var initialContent = 'This is the text content';
+
+        <JiraEditor text={initialContent} ref={onJiraEditor_Loaded} />
+        `}
+        </pre>
         <section>
           Use <em>html</em> attribute to set the editor contents in HTML.<br/><br/>
         </section>
@@ -61,6 +80,49 @@ function Demo() {
         </ol>';
 
         <JiraEditor html={initialContent} ref={onJiraEditor_Loaded} />
+        `}
+        </pre>
+        <section>
+          Use <em>required</em> to set this input as required and, therefore, validated when submitting.<br/><br/>
+        </section>
+        
+        <pre>{`
+        <JiraEditor required="true" />
+        `}
+        </pre>
+      </article>
+      <br/>
+      <article>
+        <h2>Events</h2>
+        <section>
+          <p>
+          Use <em>onChange</em> event to keep the state of the editor contents.
+          You will get the editor contents in <em>text, html and markup</em> formats inside the event object.
+          </p>
+          <p>
+          Press F12 on your navigator to see the contents of the editor changing in the console.
+          </p>
+        </section>
+        
+        <pre>{`
+        var jiraEditor = null;
+
+        function onJiraEditor_Loaded(editor) {
+          jiraEditor = editor;
+        }
+
+        function onJiraEditor_Change(editorContent) {
+          console.log(editorContent);
+          console.log(editorContent.text);
+          console.log(editorContent.html);
+          console.log(editorContent.markup);
+        }
+
+        function render() {
+          return (
+            <JiraEditor ref={onJiraEditor_Loaded} onChange={onJiraEditor_Change} />
+          )
+        }
         `}
         </pre>
       </article>
