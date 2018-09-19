@@ -30,7 +30,7 @@
 }
 
 .jira-editor .toolbar>*:first-child {
-    margin-left: 0px;
+    margin-left: 5px;
 }
 
 .jira-editor .toolbar .toolbar-group {
