@@ -5,8 +5,7 @@ module.exports = {
   entry: path.join(__dirname, "src/docs"),
   output: {
     path: path.join(__dirname, "docs"),
-    filename: "bundle.js",
-    libraryTarget: "commonjs2"
+    filename: "bundle.js"
   },
   module: {
     rules: [
