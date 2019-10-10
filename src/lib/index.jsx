@@ -31,9 +31,9 @@ class JiraEditor extends Component {
   }
 
   set text(value) {
-    this.state = {
-      editorState: (!!value) ? EditorState.createWithContent(ContentState.createFromText(value)) : EditorState.createEmpty()
-    };
+    this.setState({
+      editorState: (!!value) ? this._convertTextToEditorState(value) : EditorState.createEmpty()
+    });
   }
 
   get html() {
@@ -41,9 +41,9 @@ class JiraEditor extends Component {
   }
 
   set html(value) {
-    this.state = {
-      editorState: (!!value) ? EditorState.createWithContent(this._convertHtmlToEditorState(value)) : EditorState.createEmpty()
-    };
+    this.setState({
+      editorState: (!!value) ? this._convertHtmlToEditorState(value) : EditorState.createEmpty()
+    });
   }
 
   get markup() {
@@ -54,7 +54,10 @@ class JiraEditor extends Component {
     super(props);
 
     this._markupConverter = this._initializeConverter();
-    this.html = props.html;
+    this.state = {
+      editorState: (!!props.html) ? this._convertHtmlToEditorState(props.html) : ((!!props.text) ? this._convertTextToEditorState() : EditorState.createEmpty())
+    };
+    debugger;
   }
 
 
@@ -68,13 +71,15 @@ _initializeConverter = () => {
 
 _convertHtmlToEditorState = (html) => {
   const blocksFromHTML = htmlToDraft(html);
-  return ContentState.createFromBlockArray(
+  return EditorState.createWithContent(ContentState.createFromBlockArray(
     blocksFromHTML.contentBlocks,
     blocksFromHTML.entityMap
-  );
+  ));
 }
 
-
+_convertTextToEditorState = (text) => {
+  return EditorState.createWithContent(ContentState.createFromText(text));
+}
 
 _convertEditorStateToHtml = (editorState) => {
   return draftToHtml(convertToRaw(editorState.getCurrentContent()));
@@ -102,14 +107,12 @@ _sendChangeEvent = () => {
 
 /** EVENTS */
   onEditorState_Change = (editorState) => {
+    debugger;
     this.setState({
-      editorState,
+      editorState
     });
 
     this._sendChangeEvent();
-  };
-
-  onInput_Change = () => {
   };
 
   render() {
@@ -181,10 +184,10 @@ _sendChangeEvent = () => {
           }}
         />
       {
-        !!this.props.required && <input type="text" required value={this.text} />
+        !!this.props.required && <input type="text" required defaultValue={this.text} />
       }
       </div>
-      
+
     );
   }
 }

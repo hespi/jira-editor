@@ -38,6 +38,10 @@ function onJIRAEditor_Change(event) {
   console.log(event);
 }
 
+function onClearJiraEditor_Click() {
+  jiraEditor.html = "";
+}
+
 function Demo() {
   return (
     <div>
@@ -46,6 +50,7 @@ function Demo() {
         <JiraEditor html={initialContent} ref={onJiraEditor_Loaded} required={true} onChange={onJIRAEditor_Change} />
         <br/>
         <button type="submit">Validate and submit</button>
+        <button onClick={onClearJiraEditor_Click}>Clear</button>
       </form>
       
       <br/>
