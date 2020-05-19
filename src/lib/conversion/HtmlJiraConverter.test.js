@@ -72,6 +72,8 @@ describe('HtmlJiraConverter', () => {
     <li><span style="color: rgb(0,0,0);">Unordered list 1</span></li>
     <li><span style="color: rgb(0,0,0);">Unordered list 2</span></li>
     </ul>
+    <br />
+    <br />
     <ol>
     <li><span style="color: rgb(0,0,0);">Ordered list 1</span></li>
     <li><span style="color: rgb(0,0,0);">Ordered 😀</span>&nbsp;</li>
@@ -81,6 +83,7 @@ describe('HtmlJiraConverter', () => {
     "{{{color:#000000}THIS IS CODE ads{color}}}\n" +
     "* {color:#000000}Unordered list 1{color}\n" +
     "* {color:#000000}Unordered list 2{color}\n" +
+    "\n" +
     "\n" +
     "# {color:#000000}Ordered list 1{color}\n" +
     "# {color:#000000}Ordered �{color}� ");

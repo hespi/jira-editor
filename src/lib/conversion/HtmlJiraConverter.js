@@ -17,6 +17,7 @@ import SubscriptConverter from "./SubscriptConverter";
 import SuperscriptConverter from "./SuperscriptConverter";
 import UnderlineConverter from "./UnderlineConverter";
 import UnorderedListConverter from "./UnorderedListConverter";
+import NewLineConverter from "./NewLineConverter";
 
 export default class HtmlJiraConverter {
 
@@ -71,7 +72,8 @@ export default class HtmlJiraConverter {
             new SubscriptConverter(),
             new SuperscriptConverter(),
             new UnderlineConverter(),
-            new UnorderedListConverter()
+            new UnorderedListConverter(),
+            new NewLineConverter()
         ]);
     }
 
