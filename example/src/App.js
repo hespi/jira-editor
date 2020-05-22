@@ -1,10 +1,10 @@
-import React from "react";
-import { render } from "react-dom";
-import JiraEditor from "../../lib";
-import "./styles.css";
+import React from 'react'
+import JiraEditor from "react-jira-editor"
+import 'react-jira-editor/src/style.css'
 
 var jiraEditor;
-var initialContent = `<p>Editor <strong>content</strong><strong><em> formatted </em></strong><del>strike </del><sup>super </sup>and <sub>sub </sub><ins>underline</ins></p>
+var initialContent = `<p>Editor <strong>content</strong><strong><em> formatted </em></strong>
+<del>strike </del><sup>super </sup>and <sub>sub </sub><ins>underline</ins></p>
 <blockquote><span style="color: rgb(247,218,100);">blockquot </span></blockquote>
 <blockquote><span style="color: rgb(247,218,100);">JHGJHe</span></blockquote>
 <pre><span style="color: rgb(0,0,0);">THIS IS CODE ads</span></pre>
@@ -42,7 +42,7 @@ function onClearJiraEditor_Click() {
   jiraEditor.html = "";
 }
 
-function Demo() {
+const App = () => {
   return (
     <div>
       <h1>JIRA editor demo</h1>
@@ -71,7 +71,8 @@ function Demo() {
         </section>
         
         <pre>{`
-        var initialContent = '<p>Editor <strong>content</strong><strong><em> formatted </em></strong><del>strike </del><sup>super </sup>and <sub>sub </sub><ins>underline</ins></p>
+        var initialContent = '<p>Editor <strong>content</strong><strong><em> formatted </em></strong>
+        <del>strike </del><sup>super </sup>and <sub>sub </sub><ins>underline</ins></p>
         <blockquote><span style="color: rgb(247,218,100);">blockquot </span></blockquote>
         <blockquote><span style="color: rgb(247,218,100);">JHGJHe</span></blockquote>
         <pre><span style="color: rgb(0,0,0);">THIS IS CODE ads</span></pre>
@@ -190,4 +191,4 @@ function Demo() {
   );
 }
 
-render(<Demo />, document.getElementById("app"));
+export default App

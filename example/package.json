@@ -1,0 +1,34 @@
+{
+  "name": "react-jira-editor-example",
+  "homepage": "https://hespi.github.io/react-jira-editor",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "draft-js": "^0.11.5",
+    "draftjs-to-html": "^0.9.1",
+    "html-to-draftjs": "^1.5.0",
+    "react": "file:../node_modules/react",
+    "react-dom": "file:../node_modules/react-dom",
+    "react-draft-wysiwyg": "^1.14.5",
+    "react-jira-editor": "file:..",
+    "react-scripts": "file:../node_modules/react-scripts"
+  },
+  "scripts": {
+    "start": "node ../node_modules/react-scripts/bin/react-scripts.js start",
+    "build": "node ../node_modules/react-scripts/bin/react-scripts.js build",
+    "test": "node ../node_modules/react-scripts/bin/react-scripts.js test",
+    "eject": "node ../node_modules/react-scripts/bin/react-scripts.js eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "css-loader": "^3.5.3"
+  }
+}
